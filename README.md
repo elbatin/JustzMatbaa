@@ -9,7 +9,7 @@
 
 **A modern, user-friendly e-commerce platform designed for professional printing services.**
 
-[Demo](https://vercel.com/elbatin8-gmailcoms-projects/justz-matbaa/4sxpkvxey2zYu39cVxxhgkAahk46) • [Features](#-features) • [Tech Stack](#-tech-stack) • [Installation](#-installation) • [Screenshots](#-screenshots)
+[Demo](https://justz-matbaa-git-master-elbatin8-gmailcoms-projects.vercel.app?_vercel_share=pJTSrFN7UtQJnF8AsKfVBqp9jtUu7rmT) • [Features](#-features) • [Tech Stack](#-tech-stack) • [Installation](#-installation) • [Screenshots](#-screenshots)
 
 </div>
 
