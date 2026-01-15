@@ -17,6 +17,11 @@ interface LanguageStore {
   toggleLocale: () => void
 }
 
+// Helper to get translations safely
+const getTranslations = (locale: Locale): TranslationKeys => {
+  return translations[locale] as TranslationKeys
+}
+
 export const useLanguageStore = create<LanguageStore>()(
   persist(
     (set, get) => ({
@@ -26,7 +31,7 @@ export const useLanguageStore = create<LanguageStore>()(
       setLocale: (locale: Locale) => {
         set({ 
           locale, 
-          t: translations[locale]
+          t: getTranslations(locale)
         })
       },
 
@@ -35,7 +40,7 @@ export const useLanguageStore = create<LanguageStore>()(
         const newLocale: Locale = currentLocale === 'tr' ? 'en' : 'tr'
         set({ 
           locale: newLocale, 
-          t: translations[newLocale]
+          t: getTranslations(newLocale)
         })
       },
     }),
@@ -45,7 +50,7 @@ export const useLanguageStore = create<LanguageStore>()(
       partialize: (state) => ({ locale: state.locale }),
       onRehydrateStorage: () => (state) => {
         if (state) {
-          state.t = translations[state.locale]
+          state.t = getTranslations(state.locale)
         }
       },
     }

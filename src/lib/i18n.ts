@@ -438,4 +438,4 @@ export const translations = {
   },
 } as const
 
-export type TranslationKeys = typeof translations[Locale]
+export type TranslationKeys = typeof translations['tr']
