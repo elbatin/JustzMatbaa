@@ -1,0 +1,404 @@
+{
+  "products": [
+    {
+      "id": "prod_001",
+      "slug": "standart-kartvizit",
+      "name": "Standart Kartvizit",
+      "description": "Profesyonel görünüm için yüksek kaliteli kartvizit baskısı. İş hayatınızda fark yaratın, ilk izleniminizi güçlendirin. 350gr kuşe kağıt üzerine özenle basılır.",
+      "shortDescription": "350gr kuşe kağıt, mat/parlak laminasyon",
+      "category": "kartvizit",
+      "basePrice": 150,
+      "images": [
+        "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80",
+        "https://images.unsplash.com/photo-1572502742670-3e7e3e7e3e3e?w=800&q=80"
+      ],
+      "featured": true,
+      "printOptions": {
+        "sizes": [
+          { "id": "size_standard", "name": "Standart", "dimensions": "9x5 cm", "multiplier": 1 },
+          { "id": "size_large", "name": "Büyük", "dimensions": "10x6 cm", "multiplier": 1.2 },
+          { "id": "size_square", "name": "Kare", "dimensions": "6x6 cm", "multiplier": 1.1 }
+        ],
+        "paperTypes": [
+          { "id": "paper_matte", "name": "Mat Kuşe", "description": "350gr mat kuşe", "multiplier": 1 },
+          { "id": "paper_glossy", "name": "Parlak Kuşe", "description": "350gr parlak kuşe", "multiplier": 1.1 },
+          { "id": "paper_premium", "name": "Premium Karton", "description": "400gr özel karton", "multiplier": 1.5 }
+        ],
+        "printSides": [
+          { "id": "side_single", "name": "Tek Yüz", "multiplier": 1 },
+          { "id": "side_double", "name": "Çift Yüz", "multiplier": 1.6 }
+        ],
+        "quantities": [100, 250, 500, 1000, 2500, 5000]
+      },
+      "createdAt": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": "prod_002",
+      "slug": "ozel-kesim-kartvizit",
+      "name": "Özel Kesim Kartvizit",
+      "description": "Dikkat çekici özel kesim kartvizitler ile rakiplerinizden sıyrılın. Yuvarlak köşe, özel şekil ve lazer kesim seçenekleri mevcuttur.",
+      "shortDescription": "Özel kesim, yuvarlak köşe seçenekleri",
+      "category": "kartvizit",
+      "basePrice": 250,
+      "images": [
+        "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80",
+        "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=800&q=80"
+      ],
+      "featured": false,
+      "printOptions": {
+        "sizes": [
+          { "id": "size_standard", "name": "Standart", "dimensions": "9x5 cm", "multiplier": 1 },
+          { "id": "size_mini", "name": "Mini", "dimensions": "8x4 cm", "multiplier": 0.9 }
+        ],
+        "paperTypes": [
+          { "id": "paper_matte", "name": "Mat Kuşe", "description": "350gr mat kuşe", "multiplier": 1 },
+          { "id": "paper_velvet", "name": "Kadife Kaplama", "description": "Kadife dokunuş", "multiplier": 1.8 }
+        ],
+        "printSides": [
+          { "id": "side_single", "name": "Tek Yüz", "multiplier": 1 },
+          { "id": "side_double", "name": "Çift Yüz", "multiplier": 1.6 }
+        ],
+        "quantities": [100, 250, 500, 1000]
+      },
+      "createdAt": "2024-01-16T10:00:00Z"
+    },
+    {
+      "id": "prod_003",
+      "slug": "a4-brosur",
+      "name": "A4 Broşür",
+      "description": "Ürün ve hizmetlerinizi etkili bir şekilde tanıtın. A4 boyutunda profesyonel broşürler ile müşterilerinize detaylı bilgi sunun.",
+      "shortDescription": "A4 boyut, katlamalı veya düz",
+      "category": "brosur",
+      "basePrice": 200,
+      "images": [
+        "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=800&q=80",
+        "https://images.unsplash.com/photo-1568702846914-96b305d2uj8b?w=800&q=80"
+      ],
+      "featured": true,
+      "printOptions": {
+        "sizes": [
+          { "id": "size_a4", "name": "A4", "dimensions": "21x29.7 cm", "multiplier": 1 },
+          { "id": "size_a4_folded", "name": "A4 Katlamalı", "dimensions": "21x29.7 cm (3 katlı)", "multiplier": 1.3 }
+        ],
+        "paperTypes": [
+          { "id": "paper_115", "name": "115gr Kuşe", "description": "Ekonomik seçenek", "multiplier": 1 },
+          { "id": "paper_170", "name": "170gr Kuşe", "description": "Standart kalınlık", "multiplier": 1.2 },
+          { "id": "paper_250", "name": "250gr Kuşe", "description": "Premium kalınlık", "multiplier": 1.5 }
+        ],
+        "printSides": [
+          { "id": "side_single", "name": "Tek Yüz", "multiplier": 1 },
+          { "id": "side_double", "name": "Çift Yüz", "multiplier": 1.5 }
+        ],
+        "quantities": [100, 250, 500, 1000, 2500, 5000, 10000]
+      },
+      "createdAt": "2024-01-17T10:00:00Z"
+    },
+    {
+      "id": "prod_004",
+      "slug": "a5-brosur",
+      "name": "A5 Broşür",
+      "description": "Kompakt ve etkili A5 broşürler. El ilanı olarak da kullanılabilir, dağıtımı kolay ve ekonomik.",
+      "shortDescription": "A5 boyut, el ilanı olarak ideal",
+      "category": "brosur",
+      "basePrice": 120,
+      "images": [
+        "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80",
+        "https://images.unsplash.com/photo-1532153975070-2e9ab71f1b14?w=800&q=80"
+      ],
+      "featured": false,
+      "printOptions": {
+        "sizes": [
+          { "id": "size_a5", "name": "A5", "dimensions": "14.8x21 cm", "multiplier": 1 },
+          { "id": "size_a5_folded", "name": "A5 Katlamalı", "dimensions": "14.8x21 cm (2 katlı)", "multiplier": 1.2 }
+        ],
+        "paperTypes": [
+          { "id": "paper_115", "name": "115gr Kuşe", "description": "Ekonomik seçenek", "multiplier": 1 },
+          { "id": "paper_170", "name": "170gr Kuşe", "description": "Standart kalınlık", "multiplier": 1.2 }
+        ],
+        "printSides": [
+          { "id": "side_single", "name": "Tek Yüz", "multiplier": 1 },
+          { "id": "side_double", "name": "Çift Yüz", "multiplier": 1.5 }
+        ],
+        "quantities": [250, 500, 1000, 2500, 5000, 10000]
+      },
+      "createdAt": "2024-01-18T10:00:00Z"
+    },
+    {
+      "id": "prod_005",
+      "slug": "a3-afis",
+      "name": "A3 Afiş",
+      "description": "Etkinlik, kampanya ve duyurularınız için A3 boyutunda dikkat çekici afişler. Yüksek çözünürlüklü baskı kalitesi.",
+      "shortDescription": "A3 boyut, yüksek çözünürlük",
+      "category": "afis",
+      "basePrice": 80,
+      "images": [
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+        "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80"
+      ],
+      "featured": true,
+      "printOptions": {
+        "sizes": [
+          { "id": "size_a3", "name": "A3", "dimensions": "29.7x42 cm", "multiplier": 1 }
+        ],
+        "paperTypes": [
+          { "id": "paper_170", "name": "170gr Kuşe", "description": "Standart afiş kağıdı", "multiplier": 1 },
+          { "id": "paper_250", "name": "250gr Kuşe", "description": "Kalın afiş kağıdı", "multiplier": 1.3 },
+          { "id": "paper_poster", "name": "Poster Kağıdı", "description": "Özel poster kağıdı", "multiplier": 1.5 }
+        ],
+        "printSides": [
+          { "id": "side_single", "name": "Tek Yüz", "multiplier": 1 }
+        ],
+        "quantities": [10, 25, 50, 100, 250, 500]
+      },
+      "createdAt": "2024-01-19T10:00:00Z"
+    },
+    {
+      "id": "prod_006",
+      "slug": "50x70-afis",
+      "name": "50x70 Afiş",
+      "description": "Büyük boy afişler ile maksimum görünürlük. Mağaza vitrinleri, etkinlik alanları ve açık hava reklamları için ideal.",
+      "shortDescription": "50x70 cm, büyük boy afiş",
+      "category": "afis",
+      "basePrice": 150,
+      "images": [
+        "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+      ],
+      "featured": false,
+      "printOptions": {
+        "sizes": [
+          { "id": "size_50x70", "name": "50x70", "dimensions": "50x70 cm", "multiplier": 1 },
+          { "id": "size_70x100", "name": "70x100", "dimensions": "70x100 cm", "multiplier": 1.5 }
+        ],
+        "paperTypes": [
+          { "id": "paper_170", "name": "170gr Kuşe", "description": "Standart", "multiplier": 1 },
+          { "id": "paper_blueback", "name": "Blueback", "description": "Açık hava için", "multiplier": 1.4 }
+        ],
+        "printSides": [
+          { "id": "side_single", "name": "Tek Yüz", "multiplier": 1 }
+        ],
+        "quantities": [5, 10, 25, 50, 100]
+      },
+      "createdAt": "2024-01-20T10:00:00Z"
+    },
+    {
+      "id": "prod_007",
+      "slug": "8-sayfa-katalog",
+      "name": "8 Sayfa Katalog",
+      "description": "Ürün kataloğunuz için profesyonel 8 sayfalık katalog. Tel dikiş ciltleme ile dayanıklı ve şık görünüm.",
+      "shortDescription": "8 sayfa, tel dikiş ciltleme",
+      "category": "katalog",
+      "basePrice": 500,
+      "images": [
+        "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80",
+        "https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&q=80"
+      ],
+      "featured": true,
+      "printOptions": {
+        "sizes": [
+          { "id": "size_a4", "name": "A4", "dimensions": "21x29.7 cm", "multiplier": 1 },
+          { "id": "size_a5", "name": "A5", "dimensions": "14.8x21 cm", "multiplier": 0.7 }
+        ],
+        "paperTypes": [
+          { "id": "paper_170_135", "name": "170gr Kapak + 135gr İç", "description": "Standart", "multiplier": 1 },
+          { "id": "paper_250_170", "name": "250gr Kapak + 170gr İç", "description": "Premium", "multiplier": 1.4 }
+        ],
+        "printSides": [
+          { "id": "side_double", "name": "Çift Yüz", "multiplier": 1 }
+        ],
+        "quantities": [50, 100, 250, 500, 1000]
+      },
+      "createdAt": "2024-01-21T10:00:00Z"
+    },
+    {
+      "id": "prod_008",
+      "slug": "16-sayfa-katalog",
+      "name": "16 Sayfa Katalog",
+      "description": "Kapsamlı ürün yelpazesi için 16 sayfalık katalog. Detaylı ürün bilgileri ve görseller için geniş alan.",
+      "shortDescription": "16 sayfa, profesyonel ciltleme",
+      "category": "katalog",
+      "basePrice": 800,
+      "images": [
+        "https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&q=80",
+        "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80"
+      ],
+      "featured": false,
+      "printOptions": {
+        "sizes": [
+          { "id": "size_a4", "name": "A4", "dimensions": "21x29.7 cm", "multiplier": 1 },
+          { "id": "size_a5", "name": "A5", "dimensions": "14.8x21 cm", "multiplier": 0.7 }
+        ],
+        "paperTypes": [
+          { "id": "paper_170_135", "name": "170gr Kapak + 135gr İç", "description": "Standart", "multiplier": 1 },
+          { "id": "paper_250_170", "name": "250gr Kapak + 170gr İç", "description": "Premium", "multiplier": 1.4 },
+          { "id": "paper_300_200", "name": "300gr Kapak + 200gr İç", "description": "Lüks", "multiplier": 1.8 }
+        ],
+        "printSides": [
+          { "id": "side_double", "name": "Çift Yüz", "multiplier": 1 }
+        ],
+        "quantities": [50, 100, 250, 500, 1000]
+      },
+      "createdAt": "2024-01-22T10:00:00Z"
+    },
+    {
+      "id": "prod_009",
+      "slug": "magnet-baski",
+      "name": "Magnet Baskı",
+      "description": "Buzdolabı magneti olarak kullanılabilecek özel baskılar. Promosyon ve hatıra ürünleri için ideal.",
+      "shortDescription": "Esnek magnet, özel kesim",
+      "category": "ozel-baski",
+      "basePrice": 300,
+      "images": [
+        "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&q=80",
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+      ],
+      "featured": true,
+      "printOptions": {
+        "sizes": [
+          { "id": "size_5x5", "name": "5x5 cm", "dimensions": "5x5 cm", "multiplier": 1 },
+          { "id": "size_7x5", "name": "7x5 cm", "dimensions": "7x5 cm", "multiplier": 1.2 },
+          { "id": "size_10x7", "name": "10x7 cm", "dimensions": "10x7 cm", "multiplier": 1.5 }
+        ],
+        "paperTypes": [
+          { "id": "magnet_standard", "name": "Standart Magnet", "description": "0.5mm kalınlık", "multiplier": 1 },
+          { "id": "magnet_premium", "name": "Premium Magnet", "description": "0.8mm kalınlık", "multiplier": 1.3 }
+        ],
+        "printSides": [
+          { "id": "side_single", "name": "Tek Yüz", "multiplier": 1 }
+        ],
+        "quantities": [50, 100, 250, 500, 1000]
+      },
+      "createdAt": "2024-01-23T10:00:00Z"
+    },
+    {
+      "id": "prod_010",
+      "slug": "sticker-etiket",
+      "name": "Sticker / Etiket",
+      "description": "Ürün etiketleri, ambalaj stickerları ve promosyon çıkartmaları. Yapışkanlı ve dayanıklı.",
+      "shortDescription": "Yapışkanlı, su geçirmez seçenekler",
+      "category": "ozel-baski",
+      "basePrice": 100,
+      "images": [
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+        "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&q=80"
+      ],
+      "featured": false,
+      "printOptions": {
+        "sizes": [
+          { "id": "size_3x3", "name": "3x3 cm", "dimensions": "3x3 cm", "multiplier": 1 },
+          { "id": "size_5x5", "name": "5x5 cm", "dimensions": "5x5 cm", "multiplier": 1.3 },
+          { "id": "size_7x7", "name": "7x7 cm", "dimensions": "7x7 cm", "multiplier": 1.6 },
+          { "id": "size_10x10", "name": "10x10 cm", "dimensions": "10x10 cm", "multiplier": 2 }
+        ],
+        "paperTypes": [
+          { "id": "sticker_paper", "name": "Kağıt Sticker", "description": "Ekonomik", "multiplier": 1 },
+          { "id": "sticker_vinyl", "name": "Vinil Sticker", "description": "Su geçirmez", "multiplier": 1.5 },
+          { "id": "sticker_transparent", "name": "Şeffaf Sticker", "description": "Transparan", "multiplier": 1.8 }
+        ],
+        "printSides": [
+          { "id": "side_single", "name": "Tek Yüz", "multiplier": 1 }
+        ],
+        "quantities": [100, 250, 500, 1000, 2500, 5000]
+      },
+      "createdAt": "2024-01-24T10:00:00Z"
+    },
+    {
+      "id": "prod_011",
+      "slug": "davetiye",
+      "name": "Davetiye",
+      "description": "Düğün, nişan, açılış ve özel günler için zarif davetiyeler. Özel tasarım ve premium kağıt seçenekleri.",
+      "shortDescription": "Özel tasarım, zarflı seçenekler",
+      "category": "ozel-baski",
+      "basePrice": 400,
+      "images": [
+        "https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80",
+        "https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=800&q=80"
+      ],
+      "featured": false,
+      "printOptions": {
+        "sizes": [
+          { "id": "size_10x15", "name": "10x15 cm", "dimensions": "10x15 cm", "multiplier": 1 },
+          { "id": "size_15x21", "name": "15x21 cm", "dimensions": "15x21 cm", "multiplier": 1.3 }
+        ],
+        "paperTypes": [
+          { "id": "paper_300", "name": "300gr Karton", "description": "Standart", "multiplier": 1 },
+          { "id": "paper_texture", "name": "Dokulu Karton", "description": "Özel doku", "multiplier": 1.5 },
+          { "id": "paper_pearl", "name": "Sedefli Karton", "description": "Işıltılı", "multiplier": 1.8 }
+        ],
+        "printSides": [
+          { "id": "side_single", "name": "Tek Yüz", "multiplier": 1 },
+          { "id": "side_double", "name": "Çift Yüz", "multiplier": 1.4 }
+        ],
+        "quantities": [50, 100, 150, 200, 300, 500]
+      },
+      "createdAt": "2024-01-25T10:00:00Z"
+    },
+    {
+      "id": "prod_012",
+      "slug": "roll-up-banner",
+      "name": "Roll-Up Banner",
+      "description": "Fuar, etkinlik ve mağaza içi tanıtımlar için taşınabilir roll-up banner. Alüminyum ayak ve taşıma çantası dahil.",
+      "shortDescription": "Taşınabilir, alüminyum ayak dahil",
+      "category": "afis",
+      "basePrice": 350,
+      "images": [
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+        "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80"
+      ],
+      "featured": false,
+      "printOptions": {
+        "sizes": [
+          { "id": "size_80x200", "name": "80x200 cm", "dimensions": "80x200 cm", "multiplier": 1 },
+          { "id": "size_100x200", "name": "100x200 cm", "dimensions": "100x200 cm", "multiplier": 1.2 },
+          { "id": "size_120x200", "name": "120x200 cm", "dimensions": "120x200 cm", "multiplier": 1.4 }
+        ],
+        "paperTypes": [
+          { "id": "banner_standard", "name": "Standart Banner", "description": "440gr PVC", "multiplier": 1 },
+          { "id": "banner_premium", "name": "Premium Banner", "description": "500gr PVC", "multiplier": 1.3 }
+        ],
+        "printSides": [
+          { "id": "side_single", "name": "Tek Yüz", "multiplier": 1 }
+        ],
+        "quantities": [1, 2, 3, 5, 10]
+      },
+      "createdAt": "2024-01-26T10:00:00Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "kartvizit",
+      "name": "Kartvizit",
+      "description": "Profesyonel kartvizit baskı çözümleri",
+      "icon": "CreditCard",
+      "image": "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80"
+    },
+    {
+      "id": "brosur",
+      "name": "Broşür",
+      "description": "Tanıtım broşürleri ve el ilanları",
+      "icon": "FileText",
+      "image": "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=800&q=80"
+    },
+    {
+      "id": "afis",
+      "name": "Afiş",
+      "description": "Her boyutta afiş ve poster baskı",
+      "icon": "Image",
+      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+    },
+    {
+      "id": "katalog",
+      "name": "Katalog",
+      "description": "Profesyonel ürün katalogları",
+      "icon": "BookOpen",
+      "image": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80"
+    },
+    {
+      "id": "ozel-baski",
+      "name": "Özel Baskı",
+      "description": "Magnet, sticker ve özel ürünler",
+      "icon": "Sparkles",
+      "image": "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&q=80"
+    }
+  ]
+}
