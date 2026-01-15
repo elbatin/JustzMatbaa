@@ -1,31 +1,45 @@
 'use client'
 
+import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Package, CreditCard, FileText, Image, Sparkles, User, LogIn, LogOut, LayoutDashboard, Moon, Sun, Languages } from 'lucide-react'
+import { Home, Package, CreditCard, FileText, Image, Sparkles, LogIn, LogOut, LayoutDashboard, Moon, Sun, Languages } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { useAuthStore } from '@/stores/auth-store'
 import { useLanguageStore } from '@/stores/language-store'
+import { translations } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
 
 export function MobileNav() {
+  const [mounted, setMounted] = React.useState(false)
   const pathname = usePathname()
-  const { isAuthenticated, user, logout } = useAuthStore()
-  const isAdmin = useAuthStore((state) => state.isAdmin())
+  const { isAuthenticated: storeIsAuthenticated, user, logout } = useAuthStore()
+  const storeIsAdmin = useAuthStore((state) => state.isAdmin())
   const { locale, toggleLocale, t } = useLanguageStore()
   const { theme, setTheme } = useTheme()
 
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Use safe defaults during SSR
+  const isAuthenticated = mounted ? storeIsAuthenticated : false
+  const isAdmin = mounted ? storeIsAdmin : false
+  const safeT = mounted ? t : translations.tr
+  const safeTheme = mounted ? theme : 'light'
+  const safeLocale = mounted ? locale : 'tr'
+
   const navItems = [
-    { href: '/', label: t.nav.home, icon: Home },
-    { href: '/products', label: t.nav.products, icon: Package },
-    { href: '/products?category=kartvizit', label: t.nav.businessCard, icon: CreditCard },
-    { href: '/products?category=brosur', label: t.nav.brochure, icon: FileText },
-    { href: '/products?category=afis', label: t.nav.poster, icon: Image },
-    { href: '/products?category=katalog', label: t.categories.catalog, icon: FileText },
-    { href: '/products?category=ozel-baski', label: t.categories.flyer, icon: Sparkles },
+    { href: '/', label: safeT.nav.home, icon: Home },
+    { href: '/products', label: safeT.nav.products, icon: Package },
+    { href: '/products?category=kartvizit', label: safeT.nav.businessCard, icon: CreditCard },
+    { href: '/products?category=brosur', label: safeT.nav.brochure, icon: FileText },
+    { href: '/products?category=afis', label: safeT.nav.poster, icon: Image },
+    { href: '/products?category=katalog', label: safeT.categories.catalog, icon: FileText },
+    { href: '/products?category=ozel-baski', label: safeT.categories.flyer, icon: Sparkles },
   ]
 
   return (
@@ -68,10 +82,10 @@ export function MobileNav() {
         <Button 
           variant="outline" 
           className="flex-1 justify-start gap-2"
-          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          onClick={() => setTheme(safeTheme === 'dark' ? 'light' : 'dark')}
         >
-          {theme === 'dark' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-          {theme === 'dark' ? t.theme.dark : t.theme.light}
+          {safeTheme === 'dark' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+          {safeTheme === 'dark' ? safeT.theme.dark : safeT.theme.light}
         </Button>
         <Button 
           variant="outline" 
@@ -79,7 +93,7 @@ export function MobileNav() {
           onClick={toggleLocale}
         >
           <Languages className="h-4 w-4" />
-          {locale === 'tr' ? '🇹🇷 TR' : '🇬🇧 EN'}
+          {safeLocale === 'tr' ? '🇹🇷 TR' : '🇬🇧 EN'}
         </Button>
       </div>
 
@@ -90,13 +104,13 @@ export function MobileNav() {
         {isAuthenticated ? (
           <>
             <div className="px-3 py-2 text-sm text-muted-foreground">
-              {locale === 'tr' ? 'Hoş geldin' : 'Welcome'}, <span className="font-medium text-foreground">{user?.name}</span>
+              {safeLocale === 'tr' ? 'Hoş geldin' : 'Welcome'}, <span className="font-medium text-foreground">{user?.name}</span>
             </div>
             {isAdmin && (
               <Link href="/admin">
                 <Button variant="outline" className="w-full justify-start gap-3">
                   <LayoutDashboard className="h-4 w-4" />
-                  {t.nav.adminPanel}
+                  {safeT.nav.adminPanel}
                 </Button>
               </Link>
             )}
@@ -106,14 +120,14 @@ export function MobileNav() {
               onClick={() => logout()}
             >
               <LogOut className="h-4 w-4" />
-              {t.admin.logout}
+              {safeT.admin.logout}
             </Button>
           </>
         ) : (
           <Link href="/admin/login">
             <Button variant="outline" className="w-full justify-start gap-3">
               <LogIn className="h-4 w-4" />
-              {t.nav.login}
+              {safeT.nav.login}
             </Button>
           </Link>
         )}
