@@ -17,18 +17,16 @@ interface LanguageStore {
   toggleLocale: () => void
 }
 
-type TranslationType = typeof translations.tr | typeof translations.en
-
 export const useLanguageStore = create<LanguageStore>()(
   persist(
     (set, get) => ({
       locale: 'tr' as Locale,
-      t: translations.tr as TranslationKeys,
+      t: translations.tr,
 
       setLocale: (locale: Locale) => {
         set({ 
           locale, 
-          t: translations[locale] as TranslationKeys
+          t: translations[locale]
         })
       },
 
@@ -37,7 +35,7 @@ export const useLanguageStore = create<LanguageStore>()(
         const newLocale: Locale = currentLocale === 'tr' ? 'en' : 'tr'
         set({ 
           locale: newLocale, 
-          t: translations[newLocale] as TranslationKeys
+          t: translations[newLocale]
         })
       },
     }),
@@ -47,7 +45,7 @@ export const useLanguageStore = create<LanguageStore>()(
       partialize: (state) => ({ locale: state.locale }),
       onRehydrateStorage: () => (state) => {
         if (state) {
-          state.t = translations[state.locale] as TranslationKeys
+          state.t = translations[state.locale]
         }
       },
     }
