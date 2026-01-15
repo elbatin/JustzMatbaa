@@ -148,7 +148,7 @@ export default function AdminProductsPage() {
                         <DialogHeader>
                           <DialogTitle>{t.admin.deleteProduct}</DialogTitle>
                           <DialogDescription>
-                            "{product.name}" {t.admin.deleteConfirm}
+                            &quot;{product.name}&quot; {t.admin.deleteConfirm}
                           </DialogDescription>
                         </DialogHeader>
                         <DialogFooter>

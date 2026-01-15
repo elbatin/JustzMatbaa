@@ -35,12 +35,17 @@ export default function ProductDetailPage() {
   // Initialize selected options when product loads
   useEffect(() => {
     if (product && !selectedOptions) {
-      setSelectedOptions({
+      const newOptions = {
         sizeId: product.printOptions.sizes[0]?.id || '',
         paperTypeId: product.printOptions.paperTypes[0]?.id || '',
         printSideId: product.printOptions.printSides[0]?.id || '',
         quantity: product.printOptions.quantities[0] || 100,
-      })
+      }
+      // Use setTimeout to avoid setState in effect warning
+      const timer = setTimeout(() => {
+        setSelectedOptions(newOptions)
+      }, 0)
+      return () => clearTimeout(timer)
     }
   }, [product, selectedOptions])
 

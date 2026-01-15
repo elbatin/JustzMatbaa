@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, Suspense } from 'react'
+import { useMemo, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -19,13 +19,12 @@ function OrderSuccessContent() {
   const orderId = searchParams.get('orderId')
   const { getOrderById } = useOrderStore()
   const { t } = useLanguageStore()
-  const [order, setOrder] = useState<Order | null>(null)
-
-  useEffect(() => {
+  
+  const order = useMemo(() => {
     if (orderId) {
-      const foundOrder = getOrderById(orderId)
-      setOrder(foundOrder || null)
+      return getOrderById(orderId) || null
     }
+    return null
   }, [orderId, getOrderById])
 
   if (!order) {
