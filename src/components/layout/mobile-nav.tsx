@@ -2,27 +2,31 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Package, CreditCard, FileText, Image, Sparkles, User, LogIn, LogOut, LayoutDashboard } from 'lucide-react'
+import { Home, Package, CreditCard, FileText, Image, Sparkles, User, LogIn, LogOut, LayoutDashboard, Moon, Sun, Languages } from 'lucide-react'
+import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { useAuthStore } from '@/stores/auth-store'
+import { useLanguageStore } from '@/stores/language-store'
 import { cn } from '@/lib/utils'
-
-const navItems = [
-  { href: '/', label: 'Ana Sayfa', icon: Home },
-  { href: '/products', label: 'Tüm Ürünler', icon: Package },
-  { href: '/products?category=kartvizit', label: 'Kartvizit', icon: CreditCard },
-  { href: '/products?category=brosur', label: 'Broşür', icon: FileText },
-  { href: '/products?category=afis', label: 'Afiş', icon: Image },
-  { href: '/products?category=katalog', label: 'Katalog', icon: FileText },
-  { href: '/products?category=ozel-baski', label: 'Özel Baskı', icon: Sparkles },
-]
 
 export function MobileNav() {
   const pathname = usePathname()
   const { isAuthenticated, user, logout } = useAuthStore()
   const isAdmin = useAuthStore((state) => state.isAdmin())
+  const { locale, toggleLocale, t } = useLanguageStore()
+  const { theme, setTheme } = useTheme()
+
+  const navItems = [
+    { href: '/', label: t.nav.home, icon: Home },
+    { href: '/products', label: t.nav.products, icon: Package },
+    { href: '/products?category=kartvizit', label: t.nav.businessCard, icon: CreditCard },
+    { href: '/products?category=brosur', label: t.nav.brochure, icon: FileText },
+    { href: '/products?category=afis', label: t.nav.poster, icon: Image },
+    { href: '/products?category=katalog', label: t.categories.catalog, icon: FileText },
+    { href: '/products?category=ozel-baski', label: t.categories.flyer, icon: Sparkles },
+  ]
 
   return (
     <div className="flex flex-col h-full">
@@ -59,18 +63,40 @@ export function MobileNav() {
 
       <Separator className="my-4" />
 
+      {/* Theme & Language */}
+      <div className="flex gap-2 mb-4">
+        <Button 
+          variant="outline" 
+          className="flex-1 justify-start gap-2"
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        >
+          {theme === 'dark' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+          {theme === 'dark' ? t.theme.dark : t.theme.light}
+        </Button>
+        <Button 
+          variant="outline" 
+          className="flex-1 justify-start gap-2"
+          onClick={toggleLocale}
+        >
+          <Languages className="h-4 w-4" />
+          {locale === 'tr' ? '🇹🇷 TR' : '🇬🇧 EN'}
+        </Button>
+      </div>
+
+      <Separator className="my-4" />
+
       {/* Auth Section */}
       <div className="space-y-2">
         {isAuthenticated ? (
           <>
             <div className="px-3 py-2 text-sm text-muted-foreground">
-              Hoş geldin, <span className="font-medium text-foreground">{user?.name}</span>
+              {locale === 'tr' ? 'Hoş geldin' : 'Welcome'}, <span className="font-medium text-foreground">{user?.name}</span>
             </div>
             {isAdmin && (
               <Link href="/admin">
                 <Button variant="outline" className="w-full justify-start gap-3">
                   <LayoutDashboard className="h-4 w-4" />
-                  Admin Panel
+                  {t.nav.adminPanel}
                 </Button>
               </Link>
             )}
@@ -80,14 +106,14 @@ export function MobileNav() {
               onClick={() => logout()}
             >
               <LogOut className="h-4 w-4" />
-              Çıkış Yap
+              {t.admin.logout}
             </Button>
           </>
         ) : (
           <Link href="/admin/login">
             <Button variant="outline" className="w-full justify-start gap-3">
               <LogIn className="h-4 w-4" />
-              Giriş Yap
+              {t.nav.login}
             </Button>
           </Link>
         )}

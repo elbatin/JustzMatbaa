@@ -3,6 +3,7 @@
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { useLanguageStore } from '@/stores/language-store'
 import type { PrintOptions, SelectedPrintOptions } from '@/types'
 
 interface PrintOptionsProps {
@@ -12,6 +13,8 @@ interface PrintOptionsProps {
 }
 
 export function PrintOptionsSelector({ options, selected, onChange }: PrintOptionsProps) {
+  const { t } = useLanguageStore()
+  
   const handleSizeChange = (sizeId: string) => {
     onChange({ ...selected, sizeId })
   }
@@ -32,7 +35,7 @@ export function PrintOptionsSelector({ options, selected, onChange }: PrintOptio
     <div className="space-y-6">
       {/* Size Selection */}
       <div className="space-y-3">
-        <Label className="text-base font-semibold">Boyut</Label>
+        <Label className="text-base font-semibold">{t.productDetail.size}</Label>
         <RadioGroup
           value={selected.sizeId}
           onValueChange={handleSizeChange}
@@ -59,10 +62,10 @@ export function PrintOptionsSelector({ options, selected, onChange }: PrintOptio
 
       {/* Paper Type Selection */}
       <div className="space-y-3">
-        <Label className="text-base font-semibold">Kağıt Türü</Label>
+        <Label className="text-base font-semibold">{t.productDetail.paperType}</Label>
         <Select value={selected.paperTypeId} onValueChange={handlePaperTypeChange}>
           <SelectTrigger>
-            <SelectValue placeholder="Kağıt türü seçin" />
+            <SelectValue placeholder={t.productDetail.paperType} />
           </SelectTrigger>
           <SelectContent>
             {options.paperTypes.map((paper) => (
@@ -79,7 +82,7 @@ export function PrintOptionsSelector({ options, selected, onChange }: PrintOptio
 
       {/* Print Side Selection */}
       <div className="space-y-3">
-        <Label className="text-base font-semibold">Baskı Yüzü</Label>
+        <Label className="text-base font-semibold">{t.productDetail.printSide}</Label>
         <RadioGroup
           value={selected.printSideId}
           onValueChange={handlePrintSideChange}
@@ -98,18 +101,18 @@ export function PrintOptionsSelector({ options, selected, onChange }: PrintOptio
 
       {/* Quantity Selection */}
       <div className="space-y-3">
-        <Label className="text-base font-semibold">Adet</Label>
+        <Label className="text-base font-semibold">{t.productDetail.quantity}</Label>
         <Select 
           value={selected.quantity.toString()} 
           onValueChange={handleQuantityChange}
         >
           <SelectTrigger>
-            <SelectValue placeholder="Adet seçin" />
+            <SelectValue placeholder={t.productDetail.quantity} />
           </SelectTrigger>
           <SelectContent>
             {options.quantities.map((qty) => (
               <SelectItem key={qty} value={qty.toString()}>
-                {qty} adet
+                {qty} {t.common.pieces}
               </SelectItem>
             ))}
           </SelectContent>

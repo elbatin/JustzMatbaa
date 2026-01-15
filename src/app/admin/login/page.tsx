@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Printer, Eye, EyeOff, AlertCircle } from 'lucide-react'
 import { useAuthStore } from '@/stores/auth-store'
+import { useLanguageStore } from '@/stores/language-store'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -14,6 +15,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 export default function AdminLoginPage() {
   const router = useRouter()
   const { login } = useAuthStore()
+  const { t } = useLanguageStore()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -33,7 +35,7 @@ export default function AdminLoginPage() {
     if (success) {
       router.push('/admin')
     } else {
-      setError('Geçersiz e-posta veya şifre')
+      setError(t.admin.invalidCredentials)
     }
     
     setIsLoading(false)
@@ -53,9 +55,9 @@ export default function AdminLoginPage() {
               <Printer className="h-8 w-8 text-primary" />
               <span className="text-xl font-bold">JustzMatbaa</span>
             </Link>
-            <CardTitle>Admin Girişi</CardTitle>
+            <CardTitle>{t.admin.login}</CardTitle>
             <CardDescription>
-              Yönetim paneline erişmek için giriş yapın
+              {t.admin.loginSubtitle}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -72,7 +74,7 @@ export default function AdminLoginPage() {
               )}
 
               <div className="space-y-2">
-                <Label htmlFor="email">E-posta</Label>
+                <Label htmlFor="email">{t.admin.email}</Label>
                 <Input
                   id="email"
                   type="email"
@@ -84,7 +86,7 @@ export default function AdminLoginPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password">Şifre</Label>
+                <Label htmlFor="password">{t.admin.password}</Label>
                 <div className="relative">
                   <Input
                     id="password"
@@ -111,18 +113,18 @@ export default function AdminLoginPage() {
               </div>
 
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? 'Giriş yapılıyor...' : 'Giriş Yap'}
+                {isLoading ? t.admin.loggingIn : t.admin.loginButton}
               </Button>
             </form>
           </CardContent>
           <CardFooter className="flex flex-col gap-4">
             <div className="text-center text-sm text-muted-foreground">
-              <p className="font-medium mb-1">Demo Hesapları:</p>
+              <p className="font-medium mb-1">{t.admin.demoAccounts}:</p>
               <p>admin@justzmatbaa.com / admin123</p>
               <p>demo@justzmatbaa.com / demo123</p>
             </div>
             <Link href="/" className="text-sm text-primary hover:underline">
-              ← Ana sayfaya dön
+              ← {t.admin.backToSite}
             </Link>
           </CardFooter>
         </Card>

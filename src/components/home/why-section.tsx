@@ -3,39 +3,9 @@
 import { motion } from 'framer-motion'
 import { Truck, Award, Clock, HeadphonesIcon, Palette, ShieldCheck } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
+import { useLanguageStore } from '@/stores/language-store'
 
-const features = [
-  {
-    icon: Award,
-    title: 'Premium Kalite',
-    description: 'En kaliteli malzemeler ve son teknoloji baskı makineleri ile üretim.',
-  },
-  {
-    icon: Truck,
-    title: 'Hızlı Teslimat',
-    description: 'Siparişleriniz en kısa sürede kapınıza teslim edilir.',
-  },
-  {
-    icon: Clock,
-    title: '7/24 Sipariş',
-    description: 'İstediğiniz zaman online sipariş verebilirsiniz.',
-  },
-  {
-    icon: Palette,
-    title: 'Özel Tasarım',
-    description: 'Kendi tasarımınızı yükleyin veya profesyonel destek alın.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Güvenli Ödeme',
-    description: '256-bit SSL şifreleme ile güvenli alışveriş.',
-  },
-  {
-    icon: HeadphonesIcon,
-    title: 'Müşteri Desteği',
-    description: 'Sorularınız için her zaman yanınızdayız.',
-  },
-]
+const featureIcons = [Award, Truck, Clock, Palette, ShieldCheck, HeadphonesIcon]
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -57,6 +27,17 @@ const itemVariants = {
 }
 
 export function WhySection() {
+  const { t } = useLanguageStore()
+  
+  const features = [
+    { icon: Award, title: t.why.quality, description: t.why.qualityDesc },
+    { icon: Truck, title: t.why.fast, description: t.why.fastDesc },
+    { icon: Clock, title: t.why.support, description: t.why.supportDesc },
+    { icon: Palette, title: t.why.price, description: t.why.priceDesc },
+    { icon: ShieldCheck, title: t.why.quality, description: t.why.qualityDesc },
+    { icon: HeadphonesIcon, title: t.why.support, description: t.why.supportDesc },
+  ]
+  
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
@@ -67,10 +48,9 @@ export function WhySection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-bold mb-4">Neden JustzMatbaa?</h2>
+          <h2 className="text-3xl font-bold mb-4">{t.why.title}</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Yılların deneyimi ve müşteri memnuniyeti odaklı yaklaşımımızla 
-            baskı ihtiyaçlarınız için en doğru adrestesiniz.
+            {t.why.subtitle}
           </p>
         </motion.div>
 
@@ -81,7 +61,7 @@ export function WhySection() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {features.map((feature, index) => {
+          {features.slice(0, 4).map((feature, index) => {
             const Icon = feature.icon
             return (
               <motion.div key={index} variants={itemVariants}>

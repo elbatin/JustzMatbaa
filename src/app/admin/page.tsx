@@ -6,11 +6,13 @@ import { Package, FileText, TrendingUp, Award } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useOrderStore } from '@/stores/order-store'
 import { useProductStore } from '@/stores/product-store'
+import { useLanguageStore } from '@/stores/language-store'
 import { formatPrice } from '@/lib/utils'
 
 export default function AdminDashboardPage() {
   const { orders, getTotalOrdersCount, getTotalRevenue, getBestSellingProduct } = useOrderStore()
   const { products, fetchProducts } = useProductStore()
+  const { t } = useLanguageStore()
 
   useEffect(() => {
     if (products.length === 0) {
@@ -24,30 +26,30 @@ export default function AdminDashboardPage() {
 
   const stats = [
     {
-      title: 'Toplam Sipariş',
+      title: t.admin.totalOrders,
       value: totalOrders.toString(),
       icon: FileText,
       color: 'text-blue-600',
       bgColor: 'bg-blue-100',
     },
     {
-      title: 'Toplam Gelir',
+      title: t.admin.totalRevenue,
       value: formatPrice(totalRevenue),
       icon: TrendingUp,
       color: 'text-green-600',
       bgColor: 'bg-green-100',
     },
     {
-      title: 'Toplam Ürün',
+      title: t.admin.totalProducts,
       value: products.length.toString(),
       icon: Package,
       color: 'text-purple-600',
       bgColor: 'bg-purple-100',
     },
     {
-      title: 'En Çok Satan',
+      title: t.admin.bestSelling,
       value: bestSelling?.productName || '-',
-      subtitle: bestSelling ? `${bestSelling.quantity} adet` : undefined,
+      subtitle: bestSelling ? `${bestSelling.quantity} ${t.common.pieces}` : undefined,
       icon: Award,
       color: 'text-orange-600',
       bgColor: 'bg-orange-100',
@@ -61,8 +63,8 @@ export default function AdminDashboardPage() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p className="text-muted-foreground">Hoş geldiniz! İşte genel bakış.</p>
+        <h1 className="text-3xl font-bold">{t.admin.dashboard}</h1>
+        <p className="text-muted-foreground">{t.admin.welcome}</p>
       </motion.div>
 
       {/* Stats Grid */}
@@ -105,12 +107,12 @@ export default function AdminDashboardPage() {
       >
         <Card>
           <CardHeader>
-            <CardTitle>Son Siparişler</CardTitle>
+            <CardTitle>{t.admin.recentOrders}</CardTitle>
           </CardHeader>
           <CardContent>
             {orders.length === 0 ? (
               <p className="text-muted-foreground text-center py-8">
-                Henüz sipariş bulunmuyor.
+                {t.admin.noOrders}
               </p>
             ) : (
               <div className="space-y-4">
@@ -128,7 +130,7 @@ export default function AdminDashboardPage() {
                     <div className="text-right">
                       <p className="font-medium">{formatPrice(order.totalAmount)}</p>
                       <p className="text-xs text-muted-foreground">
-                        {order.items.length} ürün
+                        {order.items.length} {t.cart.items}
                       </p>
                     </div>
                   </div>

@@ -6,13 +6,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Check, ChevronLeft, Package } from 'lucide-react'
 import { useCartStore } from '@/stores/cart-store'
 import { useOrderStore } from '@/stores/order-store'
+import { useLanguageStore } from '@/stores/language-store'
 import { CustomerForm } from '@/components/checkout/customer-form'
 import { CreditCardForm } from '@/components/checkout/credit-card-form'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { EmptyCart } from '@/components/ui/empty-state'
-import { formatPrice, getOptionName } from '@/lib/utils'
+import { formatPrice } from '@/lib/utils'
 import { delay } from '@/lib/utils'
 import { logger } from '@/lib/logger'
 import type { CustomerInfo } from '@/types'
@@ -25,6 +26,7 @@ export default function CheckoutPage() {
   const [step, setStep] = useState<CheckoutStep>('customer')
   const [customerInfo, setCustomerInfo] = useState<CustomerInfo | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const { t } = useLanguageStore()
 
   const { items, getTotalAmount, clearCart } = useCartStore()
   const { createOrder } = useOrderStore()
@@ -75,10 +77,10 @@ export default function CheckoutPage() {
         <Link href="/cart">
           <Button variant="ghost" size="sm" className="mb-4">
             <ChevronLeft className="h-4 w-4 mr-1" />
-            Sepete Dön
+            {t.checkout.backToCart}
           </Button>
         </Link>
-        <h1 className="text-3xl font-bold">Ödeme</h1>
+        <h1 className="text-3xl font-bold">{t.checkout.title}</h1>
       </motion.div>
 
       {/* Progress Steps */}
@@ -143,7 +145,7 @@ export default function CheckoutPage() {
                   onClick={() => setStep('customer')}
                 >
                   <ChevronLeft className="h-4 w-4 mr-1" />
-                  Bilgileri Düzenle
+                  {t.checkout.editInfo}
                 </Button>
                 <CreditCardForm onSubmit={handlePaymentSubmit} isLoading={isLoading} />
               </motion.div>
@@ -157,8 +159,8 @@ export default function CheckoutPage() {
                 className="flex flex-col items-center justify-center py-16"
               >
                 <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4" />
-                <h2 className="text-xl font-semibold mb-2">Ödeme İşleniyor</h2>
-                <p className="text-muted-foreground">Lütfen bekleyin...</p>
+                <h2 className="text-xl font-semibold mb-2">{t.checkout.processing}</h2>
+                <p className="text-muted-foreground">{t.checkout.pleaseWait}</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -176,7 +178,7 @@ export default function CheckoutPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Package className="h-5 w-5" />
-                  Sipariş Özeti
+                  {t.cart.orderSummary}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -185,7 +187,7 @@ export default function CheckoutPage() {
                     <div className="flex-1">
                       <p className="font-medium line-clamp-1">{item.product.name}</p>
                       <p className="text-xs text-muted-foreground">
-                        {item.selectedOptions.quantity} adet
+                        {item.selectedOptions.quantity} {t.common.pieces}
                       </p>
                     </div>
                     <p className="font-medium">{formatPrice(item.calculatedPrice)}</p>
@@ -195,18 +197,18 @@ export default function CheckoutPage() {
                 <Separator />
 
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Ara Toplam</span>
+                  <span className="text-muted-foreground">{t.cart.subtotal}</span>
                   <span>{formatPrice(totalAmount)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Kargo</span>
-                  <span className="text-green-600">Ücretsiz</span>
+                  <span className="text-muted-foreground">{t.cart.shipping}</span>
+                  <span className="text-green-600">{t.cart.free}</span>
                 </div>
 
                 <Separator />
 
                 <div className="flex justify-between font-semibold text-lg">
-                  <span>Toplam</span>
+                  <span>{t.cart.total}</span>
                   <span className="text-primary">{formatPrice(totalAmount)}</span>
                 </div>
               </CardContent>

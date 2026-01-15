@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useState, useSyncExternalStore } from 'react'
+import { useSyncExternalStore } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Trash2, ShoppingCart } from 'lucide-react'
+import { Trash2 } from 'lucide-react'
 import { useCartStore } from '@/stores/cart-store'
+import { useLanguageStore } from '@/stores/language-store'
 import { CartItem } from '@/components/cart/cart-item'
 import { CartSummary } from '@/components/cart/cart-summary'
 import { EmptyCart } from '@/components/ui/empty-state'
@@ -23,6 +24,7 @@ export default function CartPage() {
   const isHydrated = useHydration()
   const items = useCartStore((state) => state.items)
   const clearCart = useCartStore((state) => state.clearCart)
+  const { t } = useLanguageStore()
 
   // Show skeleton loading state until client-side hydration is complete
   if (!isHydrated) {
@@ -55,9 +57,9 @@ export default function CartPage() {
         className="flex items-center justify-between mb-8"
       >
         <div>
-          <h1 className="text-3xl font-bold">Sepetim</h1>
+          <h1 className="text-3xl font-bold">{t.cart.title}</h1>
           <p className="text-muted-foreground">
-            {items.length} ürün
+            {items.length} {t.cart.items}
           </p>
         </div>
         {items.length > 0 && (
@@ -68,7 +70,7 @@ export default function CartPage() {
             onClick={() => clearCart()}
           >
             <Trash2 className="h-4 w-4 mr-2" />
-            Sepeti Temizle
+            {t.cart.clearCart}
           </Button>
         )}
       </motion.div>

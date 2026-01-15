@@ -1,25 +1,30 @@
+'use client'
+
 import Link from 'next/link'
 import { Printer, Mail, Phone, MapPin } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
-
-const footerLinks = {
-  products: [
-    { href: '/products?category=kartvizit', label: 'Kartvizit' },
-    { href: '/products?category=brosur', label: 'Broşür' },
-    { href: '/products?category=afis', label: 'Afiş' },
-    { href: '/products?category=katalog', label: 'Katalog' },
-    { href: '/products?category=ozel-baski', label: 'Özel Baskı' },
-  ],
-  company: [
-    { href: '/about', label: 'Hakkımızda' },
-    { href: '/contact', label: 'İletişim' },
-    { href: '/faq', label: 'SSS' },
-    { href: '/terms', label: 'Kullanım Koşulları' },
-    { href: '/privacy', label: 'Gizlilik Politikası' },
-  ],
-}
+import { useLanguageStore } from '@/stores/language-store'
 
 export function Footer() {
+  const t = useLanguageStore((state) => state.t)
+
+  const footerLinks = {
+    products: [
+      { href: '/products?category=kartvizit', label: t.categories.businessCard },
+      { href: '/products?category=brosur', label: t.categories.brochure },
+      { href: '/products?category=afis', label: t.categories.poster },
+      { href: '/products?category=katalog', label: t.categories.catalog },
+      { href: '/products?category=ozel-baski', label: t.categories.flyer },
+    ],
+    company: [
+      { href: '/about', label: t.footer.about },
+      { href: '/contact', label: t.footer.contact },
+      { href: '/faq', label: t.footer.faq },
+      { href: '/shipping', label: t.footer.shipping },
+      { href: '/returns', label: t.footer.returns },
+    ],
+  }
+
   return (
     <footer className="bg-muted/50 border-t">
       <div className="container mx-auto px-4 py-12">
@@ -33,14 +38,13 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              Profesyonel baskı çözümleri ile işinizi bir adım öne taşıyın. 
-              Kaliteli malzeme, hızlı teslimat, uygun fiyat.
+              {t.footer.description}
             </p>
           </div>
 
           {/* Products */}
           <div>
-            <h3 className="font-semibold mb-4">Ürünler</h3>
+            <h3 className="font-semibold mb-4">{t.footer.products}</h3>
             <ul className="space-y-2">
               {footerLinks.products.map((link) => (
                 <li key={link.href}>
@@ -57,7 +61,7 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="font-semibold mb-4">Kurumsal</h3>
+            <h3 className="font-semibold mb-4">{t.footer.company}</h3>
             <ul className="space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.href}>
@@ -74,7 +78,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold mb-4">İletişim</h3>
+            <h3 className="font-semibold mb-4">{t.footer.contact}</h3>
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 text-primary" />
@@ -95,9 +99,9 @@ export function Footer() {
         <Separator className="my-8" />
 
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>© 2024 JustzMatbaa. Tüm hakları saklıdır.</p>
+          <p>© 2024 JustzMatbaa. {t.footer.copyright}</p>
           <p className="text-xs">
-            Bu site portföy amaçlı demo projedir.
+            Portfolio demo project.
           </p>
         </div>
       </div>

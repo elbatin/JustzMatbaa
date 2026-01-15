@@ -1,8 +1,11 @@
+'use client'
+
 import { ReactNode } from 'react'
 import { ShoppingCart, Package, FileText, Search, AlertCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
+import { useLanguageStore } from '@/stores/language-store'
 
 interface EmptyStateProps {
   icon?: ReactNode
@@ -53,13 +56,14 @@ export function EmptyState({
 }
 
 export function EmptyCart() {
+  const { t } = useLanguageStore()
   return (
     <EmptyState
       icon={<ShoppingCart className="h-16 w-16" />}
-      title="Sepetiniz boş"
-      description="Henüz sepetinize ürün eklemediniz. Ürünlerimize göz atarak alışverişe başlayabilirsiniz."
+      title={t.cart.empty}
+      description={t.cart.emptyDescription}
       action={{
-        label: "Ürünlere Göz At",
+        label: t.cart.browseProducts,
         href: "/products"
       }}
     />
@@ -67,13 +71,14 @@ export function EmptyCart() {
 }
 
 export function EmptyProducts() {
+  const { t } = useLanguageStore()
   return (
     <EmptyState
       icon={<Package className="h-16 w-16" />}
-      title="Ürün bulunamadı"
-      description="Bu kategoride henüz ürün bulunmuyor. Diğer kategorilere göz atabilirsiniz."
+      title={t.products.noProducts}
+      description={t.categories.subtitle}
       action={{
-        label: "Tüm Ürünler",
+        label: t.products.all,
         href: "/products"
       }}
     />
@@ -81,23 +86,24 @@ export function EmptyProducts() {
 }
 
 export function EmptyOrders() {
+  const { t } = useLanguageStore()
   return (
     <EmptyState
       icon={<FileText className="h-16 w-16" />}
-      title="Sipariş bulunamadı"
-      description="Henüz hiç sipariş verilmemiş."
+      title={t.admin.noOrders}
     />
   )
 }
 
 export function EmptySearch({ query }: { query: string }) {
+  const { t } = useLanguageStore()
   return (
     <EmptyState
       icon={<Search className="h-16 w-16" />}
-      title="Sonuç bulunamadı"
-      description={`"${query}" araması için sonuç bulunamadı. Farklı anahtar kelimeler deneyebilirsiniz.`}
+      title={t.common.noResults}
+      description={`"${query}" ${t.common.noResults}`}
       action={{
-        label: "Tüm Ürünler",
+        label: t.products.all,
         href: "/products"
       }}
     />
@@ -105,13 +111,13 @@ export function EmptySearch({ query }: { query: string }) {
 }
 
 export function NoAccess() {
+  const { t } = useLanguageStore()
   return (
     <EmptyState
       icon={<AlertCircle className="h-16 w-16" />}
-      title="Erişim Engellendi"
-      description="Bu sayfaya erişim yetkiniz bulunmuyor."
+      title={t.common.error}
       action={{
-        label: "Ana Sayfaya Dön",
+        label: t.orderSuccess.backToHome,
         href: "/"
       }}
     />

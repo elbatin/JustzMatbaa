@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Plus, Trash2, Search } from 'lucide-react'
 import { useProductStore } from '@/stores/product-store'
+import { useLanguageStore } from '@/stores/language-store'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
@@ -30,6 +31,7 @@ import { toast } from 'sonner'
 
 export default function AdminProductsPage() {
   const { products, isLoading, fetchProducts, deleteProduct, searchProducts } = useProductStore()
+  const { t } = useLanguageStore()
   const [searchQuery, setSearchQuery] = useState('')
   const [deleteId, setDeleteId] = useState<string | null>(null)
 
@@ -46,7 +48,7 @@ export default function AdminProductsPage() {
   const handleDelete = (id: string) => {
     deleteProduct(id)
     setDeleteId(null)
-    toast.success('Ürün silindi')
+    toast.success(t.admin.productDeleted)
   }
 
   return (
@@ -57,12 +59,12 @@ export default function AdminProductsPage() {
         className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8"
       >
         <div>
-          <h1 className="text-3xl font-bold">Ürünler</h1>
-          <p className="text-muted-foreground">{products.length} ürün</p>
+          <h1 className="text-3xl font-bold">{t.admin.products}</h1>
+          <p className="text-muted-foreground">{products.length} {t.cart.items}</p>
         </div>
         <Button className="gap-2" disabled>
           <Plus className="h-4 w-4" />
-          Yeni Ürün (Demo)
+          {t.admin.newProduct}
         </Button>
       </motion.div>
 
@@ -76,7 +78,7 @@ export default function AdminProductsPage() {
         <div className="relative max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Ürün ara..."
+            placeholder={t.admin.searchProducts}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-9"
@@ -99,11 +101,11 @@ export default function AdminProductsPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Ürün</TableHead>
-                <TableHead>Kategori</TableHead>
-                <TableHead>Fiyat</TableHead>
-                <TableHead>Durum</TableHead>
-                <TableHead className="text-right">İşlemler</TableHead>
+                <TableHead>{t.admin.products}</TableHead>
+                <TableHead>{t.admin.category}</TableHead>
+                <TableHead>{t.admin.price}</TableHead>
+                <TableHead>{t.admin.status}</TableHead>
+                <TableHead className="text-right">{t.admin.actions}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -125,9 +127,9 @@ export default function AdminProductsPage() {
                   <TableCell>{formatPrice(product.basePrice)}</TableCell>
                   <TableCell>
                     {product.featured ? (
-                      <Badge>Öne Çıkan</Badge>
+                      <Badge>{t.admin.featured}</Badge>
                     ) : (
-                      <Badge variant="secondary">Normal</Badge>
+                      <Badge variant="secondary">{t.admin.normal}</Badge>
                     )}
                   </TableCell>
                   <TableCell className="text-right">
@@ -144,21 +146,20 @@ export default function AdminProductsPage() {
                       </DialogTrigger>
                       <DialogContent>
                         <DialogHeader>
-                          <DialogTitle>Ürünü Sil</DialogTitle>
+                          <DialogTitle>{t.admin.deleteProduct}</DialogTitle>
                           <DialogDescription>
-                            "{product.name}" ürününü silmek istediğinize emin misiniz? 
-                            Bu işlem geri alınamaz.
+                            "{product.name}" {t.admin.deleteConfirm}
                           </DialogDescription>
                         </DialogHeader>
                         <DialogFooter>
                           <Button variant="outline" onClick={() => setDeleteId(null)}>
-                            İptal
+                            {t.admin.cancel}
                           </Button>
                           <Button 
                             variant="destructive" 
                             onClick={() => handleDelete(product.id)}
                           >
-                            Sil
+                            {t.admin.delete}
                           </Button>
                         </DialogFooter>
                       </DialogContent>

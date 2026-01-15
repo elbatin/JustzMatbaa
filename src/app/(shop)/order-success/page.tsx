@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { CheckCircle, Package, Home, FileText, Printer } from 'lucide-react'
 import { useOrderStore } from '@/stores/order-store'
+import { useLanguageStore } from '@/stores/language-store'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
@@ -17,6 +18,7 @@ function OrderSuccessContent() {
   const searchParams = useSearchParams()
   const orderId = searchParams.get('orderId')
   const { getOrderById } = useOrderStore()
+  const { t } = useLanguageStore()
   const [order, setOrder] = useState<Order | null>(null)
 
   useEffect(() => {
@@ -29,12 +31,12 @@ function OrderSuccessContent() {
   if (!order) {
     return (
       <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-2xl font-bold mb-4">Sipariş Bulunamadı</h1>
+        <h1 className="text-2xl font-bold mb-4">{t.common.noResults}</h1>
         <p className="text-muted-foreground mb-8">
-          Aradığınız sipariş bulunamadı veya geçersiz bir bağlantı kullandınız.
+          {t.common.error}
         </p>
         <Link href="/">
-          <Button>Ana Sayfaya Dön</Button>
+          <Button>{t.orderSuccess.backToHome}</Button>
         </Link>
       </div>
     )
@@ -64,7 +66,7 @@ function OrderSuccessContent() {
           transition={{ delay: 0.3 }}
           className="text-3xl font-bold mb-2"
         >
-          Siparişiniz Alındı!
+          {t.orderSuccess.title}
         </motion.h1>
         
         <motion.p
@@ -73,7 +75,7 @@ function OrderSuccessContent() {
           transition={{ delay: 0.4 }}
           className="text-muted-foreground max-w-md mx-auto"
         >
-          Siparişiniz başarıyla oluşturuldu. En kısa sürede hazırlanıp kargoya verilecektir.
+          {t.orderSuccess.subtitle}
         </motion.p>
       </motion.div>
 
@@ -88,25 +90,25 @@ function OrderSuccessContent() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <FileText className="h-5 w-5" />
-                Sipariş Bilgileri
+                {t.orderSuccess.orderDetails}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm text-muted-foreground">Sipariş Numarası</p>
+                  <p className="text-sm text-muted-foreground">{t.orderSuccess.orderNumber}</p>
                   <p className="font-mono font-semibold text-primary">{order.orderNumber}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Sipariş Tarihi</p>
+                  <p className="text-sm text-muted-foreground">{t.orderSuccess.orderDate}</p>
                   <p className="font-medium">{formatDate(order.createdAt)}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Durum</p>
-                  <p className="font-medium text-yellow-600">Hazırlanıyor</p>
+                  <p className="text-sm text-muted-foreground">{t.orderSuccess.status}</p>
+                  <p className="font-medium text-yellow-600">{t.orderSuccess.preparing}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Toplam Tutar</p>
+                  <p className="text-sm text-muted-foreground">{t.orderSuccess.totalAmount}</p>
                   <p className="font-bold text-lg text-primary">{formatPrice(order.totalAmount)}</p>
                 </div>
               </div>
@@ -124,7 +126,7 @@ function OrderSuccessContent() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Package className="h-5 w-5" />
-                Sipariş Detayları
+                {t.orderSuccess.orderDetails}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -137,7 +139,7 @@ function OrderSuccessContent() {
                         <p className="text-sm text-muted-foreground">
                           {getOptionName(item.product.printOptions.sizes, item.selectedOptions.sizeId)} • 
                           {getOptionName(item.product.printOptions.paperTypes, item.selectedOptions.paperTypeId)} • 
-                          {item.selectedOptions.quantity} adet
+                          {item.selectedOptions.quantity} {t.common.pieces}
                         </p>
                       </div>
                       <p className="font-medium">{formatPrice(item.calculatedPrice)}</p>
@@ -158,7 +160,7 @@ function OrderSuccessContent() {
         >
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Teslimat Adresi</CardTitle>
+              <CardTitle>{t.orderSuccess.deliveryAddress}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="font-medium">
@@ -185,13 +187,13 @@ function OrderSuccessContent() {
           <Link href="/">
             <Button variant="outline" className="w-full sm:w-auto gap-2">
               <Home className="h-4 w-4" />
-              Ana Sayfaya Dön
+              {t.orderSuccess.backToHome}
             </Button>
           </Link>
           <Link href="/products">
             <Button className="w-full sm:w-auto gap-2">
               <Printer className="h-4 w-4" />
-              Alışverişe Devam Et
+              {t.orderSuccess.continueShopping}
             </Button>
           </Link>
         </motion.div>
@@ -203,7 +205,7 @@ function OrderSuccessContent() {
           transition={{ delay: 1 }}
           className="text-center text-xs text-muted-foreground mt-8"
         >
-          Bu bir demo projesidir. Gerçek sipariş veya ödeme işlemi yapılmamıştır.
+          {t.orderSuccess.demoNotice}
         </motion.p>
       </div>
     </div>

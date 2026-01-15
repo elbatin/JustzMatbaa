@@ -4,49 +4,50 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { CreditCard, FileText, Image, BookOpen, Sparkles, ArrowRight } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
+import { useLanguageStore } from '@/stores/language-store'
 import type { ProductCategory } from '@/types'
 
 interface CategoryItem {
   id: ProductCategory
-  name: string
-  description: string
+  nameKey: 'businessCard' | 'brochure' | 'poster' | 'catalog' | 'flyer'
+  descriptionKey: string
   icon: React.ElementType
   color: string
 }
 
-const categories: CategoryItem[] = [
+const categoryItems: CategoryItem[] = [
   {
     id: 'kartvizit',
-    name: 'Kartvizit',
-    description: 'Profesyonel ilk izlenim',
+    nameKey: 'businessCard',
+    descriptionKey: 'businessCardDesc',
     icon: CreditCard,
     color: 'from-blue-500/20 to-blue-600/20',
   },
   {
     id: 'brosur',
-    name: 'Broşür',
-    description: 'Etkili tanıtım materyalleri',
+    nameKey: 'brochure',
+    descriptionKey: 'brochureDesc',
     icon: FileText,
     color: 'from-green-500/20 to-green-600/20',
   },
   {
     id: 'afis',
-    name: 'Afiş',
-    description: 'Dikkat çekici görseller',
+    nameKey: 'poster',
+    descriptionKey: 'posterDesc',
     icon: Image,
     color: 'from-purple-500/20 to-purple-600/20',
   },
   {
     id: 'katalog',
-    name: 'Katalog',
-    description: 'Kapsamlı ürün sunumları',
+    nameKey: 'catalog',
+    descriptionKey: 'catalogDesc',
     icon: BookOpen,
     color: 'from-orange-500/20 to-orange-600/20',
   },
   {
     id: 'ozel-baski',
-    name: 'Özel Baskı',
-    description: 'Kişiye özel çözümler',
+    nameKey: 'flyer',
+    descriptionKey: 'flyerDesc',
     icon: Sparkles,
     color: 'from-pink-500/20 to-pink-600/20',
   },
@@ -72,6 +73,8 @@ const itemVariants = {
 }
 
 export function CategoryCards() {
+  const { t } = useLanguageStore()
+  
   return (
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -82,10 +85,9 @@ export function CategoryCards() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-bold mb-4">Ürün Kategorileri</h2>
+          <h2 className="text-3xl font-bold mb-4">{t.categories.title}</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            İhtiyacınıza uygun baskı çözümünü seçin. Her kategori için 
-            farklı boyut, kağıt ve baskı seçenekleri sunuyoruz.
+            {t.categories.subtitle}
           </p>
         </motion.div>
 
@@ -96,7 +98,7 @@ export function CategoryCards() {
           viewport={{ once: true }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4"
         >
-          {categories.map((category) => {
+          {categoryItems.map((category) => {
             const Icon = category.icon
             return (
               <motion.div key={category.id} variants={itemVariants}>
@@ -107,13 +109,13 @@ export function CategoryCards() {
                         <Icon className="h-6 w-6 text-foreground" />
                       </div>
                       <h3 className="font-semibold mb-1 group-hover:text-primary transition-colors">
-                        {category.name}
+                        {t.categories[category.nameKey]}
                       </h3>
                       <p className="text-sm text-muted-foreground mb-3">
-                        {category.description}
+                        {t.categories.subtitle}
                       </p>
                       <div className="flex items-center text-sm text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span>Keşfet</span>
+                        <span>{t.products.viewDetails}</span>
                         <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
                       </div>
                     </CardContent>

@@ -4,6 +4,7 @@ import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useProductStore } from '@/stores/product-store'
+import { useLanguageStore } from '@/stores/language-store'
 import { ProductCard } from '@/components/products/product-card'
 import { ProductListItem } from '@/components/products/product-list-item'
 import { CategoryFilter } from '@/components/products/category-filter'
@@ -17,6 +18,7 @@ function ProductsContent() {
   const searchParams = useSearchParams()
   const category = searchParams.get('category') as ProductCategory | null
   const [view, setView] = useState<'grid' | 'list'>('grid')
+  const { t } = useLanguageStore()
   
   const { products, isLoading, fetchProducts, getProductsByCategory } = useProductStore()
 
@@ -31,8 +33,8 @@ function ProductsContent() {
     : products
 
   const pageTitle = category 
-    ? `${getCategoryName(category)} Ürünleri`
-    : 'Tüm Ürünler'
+    ? `${getCategoryName(category)} ${t.products.title}`
+    : t.products.all
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -45,7 +47,7 @@ function ProductsContent() {
       >
         <h1 className="text-3xl font-bold mb-2">{pageTitle}</h1>
         <p className="text-muted-foreground">
-          {filteredProducts.length} ürün bulundu
+          {filteredProducts.length} {t.cart.items}
         </p>
       </motion.div>
 

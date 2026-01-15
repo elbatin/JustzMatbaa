@@ -8,6 +8,7 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { formatPrice, getCategoryName } from '@/lib/utils'
+import { useLanguageStore } from '@/stores/language-store'
 import type { Product } from '@/types'
 
 interface ProductCardProps {
@@ -15,6 +16,8 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const { t } = useLanguageStore()
+  
   return (
     <motion.div
       whileHover={{ y: -4 }}
@@ -32,12 +35,12 @@ export function ProductCard({ product }: ProductCardProps) {
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                <span>Görsel yok</span>
+                <span>{t.products.noProducts}</span>
               </div>
             )}
             {product.featured && (
               <Badge className="absolute top-2 left-2" variant="secondary">
-                Öne Çıkan
+                {t.admin.featured}
               </Badge>
             )}
           </div>
@@ -59,7 +62,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
         <CardFooter className="p-4 pt-0 flex justify-between items-center">
           <div>
-            <span className="text-xs text-muted-foreground">Başlangıç</span>
+            <span className="text-xs text-muted-foreground">{t.products.from}</span>
             <p className="font-bold text-primary">
               {formatPrice(product.basePrice)}
             </p>
@@ -67,7 +70,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <Link href={`/products/${product.slug}`}>
             <Button size="sm" className="gap-2">
               <ShoppingCart className="h-4 w-4" />
-              İncele
+              {t.products.viewDetails}
             </Button>
           </Link>
         </CardFooter>

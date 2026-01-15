@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { useLanguageStore } from '@/stores/language-store'
 
 interface CreditCardFormProps {
   onSubmit: () => void
@@ -13,6 +14,7 @@ interface CreditCardFormProps {
 }
 
 export function CreditCardForm({ onSubmit, isLoading }: CreditCardFormProps) {
+  const { t } = useLanguageStore()
   const [cardNumber, setCardNumber] = useState('')
   const [expiry, setExpiry] = useState('')
   const [cvv, setCvv] = useState('')
@@ -47,28 +49,28 @@ export function CreditCardForm({ onSubmit, isLoading }: CreditCardFormProps) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <CreditCard className="h-5 w-5" />
-          Ödeme Bilgileri
+          {t.checkout.paymentInfo}
         </CardTitle>
         <CardDescription className="flex items-center gap-1 text-xs">
           <Lock className="h-3 w-3" />
-          Demo amaçlı - Gerçek ödeme alınmaz
+          {t.checkout.demoNotice}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="cardName">Kart Üzerindeki İsim</Label>
+            <Label htmlFor="cardName">{t.checkout.cardName}</Label>
             <Input
               id="cardName"
               value={cardName}
               onChange={(e) => setCardName(e.target.value)}
-              placeholder="AD SOYAD"
+              placeholder={t.checkout.cardName}
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="cardNumber">Kart Numarası</Label>
+            <Label htmlFor="cardNumber">{t.checkout.cardNumber}</Label>
             <div className="relative">
               <Input
                 id="cardNumber"
@@ -84,7 +86,7 @@ export function CreditCardForm({ onSubmit, isLoading }: CreditCardFormProps) {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="expiry">Son Kullanma</Label>
+              <Label htmlFor="expiry">{t.checkout.expiry}</Label>
               <Input
                 id="expiry"
                 value={expiry}
@@ -96,7 +98,7 @@ export function CreditCardForm({ onSubmit, isLoading }: CreditCardFormProps) {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="cvv">CVV</Label>
+              <Label htmlFor="cvv">{t.checkout.cvv}</Label>
               <Input
                 id="cvv"
                 type="password"
@@ -120,18 +122,18 @@ export function CreditCardForm({ onSubmit, isLoading }: CreditCardFormProps) {
             </div>
             <div className="flex justify-between text-sm">
               <div>
-                <div className="text-xs opacity-70">Kart Sahibi</div>
-                <div>{cardName || 'AD SOYAD'}</div>
+                <div className="text-xs opacity-70">{t.checkout.cardName}</div>
+                <div>{cardName || t.checkout.cardName}</div>
               </div>
               <div>
-                <div className="text-xs opacity-70">Son Kullanma</div>
+                <div className="text-xs opacity-70">{t.checkout.expiry}</div>
                 <div>{expiry || 'AA/YY'}</div>
               </div>
             </div>
           </div>
 
           <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
-            {isLoading ? 'Ödeme İşleniyor...' : 'Ödemeyi Tamamla'}
+            {isLoading ? t.checkout.processing : t.checkout.completePayment}
           </Button>
         </form>
       </CardContent>

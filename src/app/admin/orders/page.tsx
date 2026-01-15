@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useOrderStore } from '@/stores/order-store'
+import { useLanguageStore } from '@/stores/language-store'
 import { Badge } from '@/components/ui/badge'
 import {
   Table,
@@ -26,11 +27,12 @@ import { Eye } from 'lucide-react'
 import type { Order } from '@/types'
 
 function OrderStatusBadge({ status }: { status: Order['status'] }) {
+  const { t } = useLanguageStore()
   const variants: Record<Order['status'], { label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }> = {
-    pending: { label: 'Beklemede', variant: 'secondary' },
-    processing: { label: 'Hazırlanıyor', variant: 'default' },
-    completed: { label: 'Tamamlandı', variant: 'outline' },
-    cancelled: { label: 'İptal', variant: 'destructive' },
+    pending: { label: t.admin.pending, variant: 'secondary' },
+    processing: { label: t.admin.processing, variant: 'default' },
+    completed: { label: t.admin.completed, variant: 'outline' },
+    cancelled: { label: t.admin.cancelled, variant: 'destructive' },
   }
   
   const { label, variant } = variants[status]
@@ -39,6 +41,7 @@ function OrderStatusBadge({ status }: { status: Order['status'] }) {
 
 export default function AdminOrdersPage() {
   const { orders } = useOrderStore()
+  const { t } = useLanguageStore()
 
   return (
     <div>
@@ -47,8 +50,8 @@ export default function AdminOrdersPage() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <h1 className="text-3xl font-bold">Siparişler</h1>
-        <p className="text-muted-foreground">{orders.length} sipariş</p>
+        <h1 className="text-3xl font-bold">{t.admin.orders}</h1>
+        <p className="text-muted-foreground">{orders.length} {t.cart.items}</p>
       </motion.div>
 
       <motion.div
@@ -65,12 +68,12 @@ export default function AdminOrdersPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Sipariş No</TableHead>
-                <TableHead>Müşteri</TableHead>
-                <TableHead>Tarih</TableHead>
-                <TableHead>Tutar</TableHead>
-                <TableHead>Durum</TableHead>
-                <TableHead className="text-right">İşlemler</TableHead>
+                <TableHead>{t.admin.orderNo}</TableHead>
+                <TableHead>{t.admin.customer}</TableHead>
+                <TableHead>{t.admin.date}</TableHead>
+                <TableHead>{t.admin.amount}</TableHead>
+                <TableHead>{t.admin.status}</TableHead>
+                <TableHead className="text-right">{t.admin.actions}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -107,16 +110,16 @@ export default function AdminOrdersPage() {
                       </DialogTrigger>
                       <DialogContent className="max-w-2xl">
                         <DialogHeader>
-                          <DialogTitle>Sipariş Detayı</DialogTitle>
+                          <DialogTitle>{t.admin.orderDetail}</DialogTitle>
                         </DialogHeader>
                         <div className="space-y-4">
                           <div className="grid grid-cols-2 gap-4">
                             <div>
-                              <p className="text-sm text-muted-foreground">Sipariş No</p>
+                              <p className="text-sm text-muted-foreground">{t.admin.orderNo}</p>
                               <p className="font-mono font-medium">{order.orderNumber}</p>
                             </div>
                             <div>
-                              <p className="text-sm text-muted-foreground">Tarih</p>
+                              <p className="text-sm text-muted-foreground">{t.admin.date}</p>
                               <p className="font-medium">{formatDate(order.createdAt)}</p>
                             </div>
                           </div>
@@ -124,7 +127,7 @@ export default function AdminOrdersPage() {
                           <Separator />
 
                           <div>
-                            <p className="text-sm text-muted-foreground mb-2">Müşteri Bilgileri</p>
+                            <p className="text-sm text-muted-foreground mb-2">{t.admin.customerInfo}</p>
                             <p className="font-medium">
                               {order.customerInfo.firstName} {order.customerInfo.lastName}
                             </p>
@@ -139,7 +142,7 @@ export default function AdminOrdersPage() {
                           <Separator />
 
                           <div>
-                            <p className="text-sm text-muted-foreground mb-2">Ürünler</p>
+                            <p className="text-sm text-muted-foreground mb-2">{t.admin.products}</p>
                             <div className="space-y-2">
                               {order.items.map((item) => (
                                 <div key={item.id} className="flex justify-between p-2 bg-muted rounded">
@@ -147,7 +150,7 @@ export default function AdminOrdersPage() {
                                     <p className="font-medium">{item.product.name}</p>
                                     <p className="text-xs text-muted-foreground">
                                       {getOptionName(item.product.printOptions.sizes, item.selectedOptions.sizeId)} • 
-                                      {item.selectedOptions.quantity} adet
+                                      {item.selectedOptions.quantity} {t.common.pieces}
                                     </p>
                                   </div>
                                   <p className="font-medium">{formatPrice(item.calculatedPrice)}</p>
@@ -159,7 +162,7 @@ export default function AdminOrdersPage() {
                           <Separator />
 
                           <div className="flex justify-between text-lg font-bold">
-                            <span>Toplam</span>
+                            <span>{t.cart.total}</span>
                             <span className="text-primary">{formatPrice(order.totalAmount)}</span>
                           </div>
                         </div>

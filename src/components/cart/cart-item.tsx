@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { useCartStore } from '@/stores/cart-store'
+import { useLanguageStore } from '@/stores/language-store'
 import { formatPrice, getOptionName } from '@/lib/utils'
 import type { CartItem as CartItemType } from '@/types'
 
@@ -16,6 +17,7 @@ interface CartItemProps {
 
 export function CartItem({ item }: CartItemProps) {
   const { removeItem, updateQuantity } = useCartStore()
+  const { t } = useLanguageStore()
   const { product, selectedOptions, calculatedPrice } = item
 
   const sizeName = getOptionName(product.printOptions.sizes, selectedOptions.sizeId)
@@ -56,7 +58,7 @@ export function CartItem({ item }: CartItemProps) {
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-xs text-muted-foreground">
-                  Görsel yok
+                  {t.products.noProducts}
                 </div>
               )}
             </div>
@@ -71,9 +73,9 @@ export function CartItem({ item }: CartItemProps) {
             </Link>
             
             <div className="text-sm text-muted-foreground mt-1 space-y-0.5">
-              <p>Boyut: {sizeName}</p>
-              <p>Kağıt: {paperName}</p>
-              <p>Baskı: {sideName}</p>
+              <p>{t.productDetail.size}: {sizeName}</p>
+              <p>{t.productDetail.paperType}: {paperName}</p>
+              <p>{t.productDetail.printSide}: {sideName}</p>
             </div>
           </div>
 
@@ -105,7 +107,7 @@ export function CartItem({ item }: CartItemProps) {
                   <Minus className="h-3 w-3" />
                 </Button>
                 <span className="w-16 text-center text-sm font-medium">
-                  {selectedOptions.quantity} adet
+                  {selectedOptions.quantity} {t.common.pieces}
                 </span>
                 <Button
                   variant="outline"

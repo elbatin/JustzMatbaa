@@ -4,8 +4,11 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight, Sparkles, Zap, Shield } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { useLanguageStore } from '@/stores/language-store'
 
 export function HeroSection() {
+  const { t } = useLanguageStore()
+  
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5">
       {/* Background Pattern */}
@@ -22,30 +25,27 @@ export function HeroSection() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
               <Sparkles className="h-4 w-4" />
-              Profesyonel Baskı Çözümleri
+              {t.hero.title}
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-              İşinizi{' '}
-              <span className="text-primary">Bir Adım</span>{' '}
-              Öne Taşıyın
+              {t.hero.title}
             </h1>
 
             <p className="text-lg text-muted-foreground max-w-lg">
-              Kartvizit, broşür, afiş ve daha fazlası. Kaliteli malzeme, 
-              hızlı teslimat ve uygun fiyatlarla profesyonel baskı hizmetleri.
+              {t.hero.subtitle}
             </p>
 
             <div className="flex flex-wrap gap-4">
               <Link href="/products">
                 <Button size="lg" className="gap-2">
-                  Ürünleri Keşfet
+                  {t.hero.cta}
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
               <Link href="/products?category=kartvizit">
                 <Button size="lg" variant="outline">
-                  Kartvizit Tasarla
+                  {t.hero.ctaSecondary}
                 </Button>
               </Link>
             </div>
@@ -54,11 +54,11 @@ export function HeroSection() {
             <div className="flex flex-wrap gap-6 pt-4">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Zap className="h-5 w-5 text-primary" />
-                <span>Hızlı Teslimat</span>
+                <span>{t.why.fast}</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Shield className="h-5 w-5 text-primary" />
-                <span>Kalite Garantisi</span>
+                <span>{t.why.quality}</span>
               </div>
             </div>
           </motion.div>

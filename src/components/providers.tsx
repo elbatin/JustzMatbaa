@@ -12,9 +12,10 @@ export function Providers({ children }: ProvidersProps) {
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="light"
-      enableSystem={false}
-      disableTransitionOnChange
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange={false}
+      storageKey="justz-matbaa-theme"
     >
       {children}
       <Toaster position="top-right" richColors closeButton />

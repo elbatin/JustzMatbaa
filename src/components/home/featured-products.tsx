@@ -8,9 +8,11 @@ import { Button } from '@/components/ui/button'
 import { useProductStore } from '@/stores/product-store'
 import { ProductCard } from '@/components/products/product-card'
 import { ProductGridSkeleton } from '@/components/ui/product-skeleton'
+import { useLanguageStore } from '@/stores/language-store'
 
 export function FeaturedProducts() {
   const { products, isLoading, fetchProducts, getFeaturedProducts } = useProductStore()
+  const { t } = useLanguageStore()
   const featuredProducts = getFeaturedProducts()
 
   useEffect(() => {
@@ -30,14 +32,14 @@ export function FeaturedProducts() {
           className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12"
         >
           <div>
-            <h2 className="text-3xl font-bold mb-2">Öne Çıkan Ürünler</h2>
+            <h2 className="text-3xl font-bold mb-2">{t.products.featured}</h2>
             <p className="text-muted-foreground">
-              En çok tercih edilen baskı ürünlerimiz
+              {t.products.featuredSubtitle}
             </p>
           </div>
           <Link href="/products">
             <Button variant="outline" className="gap-2">
-              Tümünü Gör
+              {t.products.all}
               <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>
