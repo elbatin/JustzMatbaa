@@ -99,10 +99,7 @@ export function Footer() {
         <Separator className="my-8" />
 
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>© 2024 JustzMatbaa. {t.footer.copyright}</p>
-          <p className="text-xs">
-            Portfolio demo project.
-          </p>
+          <p>© 2026 JustzMatbaa. {t.footer.copyright}</p>
         </div>
       </div>
     </footer>
