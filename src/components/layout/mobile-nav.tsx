@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import * as React from 'react'
 import Link from 'next/link'
@@ -25,7 +25,6 @@ export function MobileNav() {
     setMounted(true)
   }, [])
 
-  // Use safe defaults during SSR
   const isAuthenticated = mounted ? storeIsAuthenticated : false
   const isAdmin = mounted ? storeIsAdmin : false
   const safeT = mounted ? t : translations.tr
@@ -55,18 +54,10 @@ export function MobileNav() {
       <nav className="flex flex-col gap-1 flex-1">
         {navItems.map((item) => {
           const Icon = item.icon
-          const isActive = pathname === item.href || 
-            (item.href !== '/' && pathname.startsWith(item.href.split('?')[0]))
-          
+          const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href.split('?')[0]))
           return (
             <Link key={item.href} href={item.href}>
-              <Button
-                variant={isActive ? 'secondary' : 'ghost'}
-                className={cn(
-                  'w-full justify-start gap-3',
-                  isActive && 'bg-primary/10 text-primary'
-                )}
-              >
+              <Button variant={isActive ? 'secondary' : 'ghost'} className={cn('w-full justify-start gap-3', isActive && 'bg-primary/10 text-primary')}>
                 <Icon className="h-4 w-4" />
                 {item.label}
               </Button>
@@ -77,34 +68,24 @@ export function MobileNav() {
 
       <Separator className="my-4" />
 
-      {/* Theme & Language */}
       <div className="flex gap-2 mb-4">
-        <Button 
-          variant="outline" 
-          className="flex-1 justify-start gap-2"
-          onClick={() => setTheme(safeTheme === 'dark' ? 'light' : 'dark')}
-        >
+        <Button variant="outline" className="flex-1 justify-start gap-2" onClick={() => setTheme(safeTheme === 'dark' ? 'light' : 'dark')}>
           {safeTheme === 'dark' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
           {safeTheme === 'dark' ? safeT.theme.dark : safeT.theme.light}
         </Button>
-        <Button 
-          variant="outline" 
-          className="flex-1 justify-start gap-2"
-          onClick={toggleLocale}
-        >
+        <Button variant="outline" className="flex-1 justify-start gap-2" onClick={toggleLocale}>
           <Languages className="h-4 w-4" />
-          {safeLocale === 'tr' ? '🇹🇷 TR' : '🇬🇧 EN'}
+          {safeLocale === 'tr' ? 'TR' : 'EN'}
         </Button>
       </div>
 
       <Separator className="my-4" />
 
-      {/* Auth Section */}
       <div className="space-y-2">
         {isAuthenticated ? (
           <>
             <div className="px-3 py-2 text-sm text-muted-foreground">
-              {safeLocale === 'tr' ? 'Hoş geldin' : 'Welcome'}, <span className="font-medium text-foreground">{user?.name}</span>
+              {safeLocale === 'tr' ? 'Hos geldin' : 'Welcome'}, <span className="font-medium text-foreground">{user?.name}</span>
             </div>
             {isAdmin && (
               <Link href="/admin">
@@ -114,11 +95,7 @@ export function MobileNav() {
                 </Button>
               </Link>
             )}
-            <Button 
-              variant="ghost" 
-              className="w-full justify-start gap-3 text-destructive hover:text-destructive"
-              onClick={() => logout()}
-            >
+            <Button variant="ghost" className="w-full justify-start gap-3 text-destructive hover:text-destructive" onClick={() => logout()}>
               <LogOut className="h-4 w-4" />
               {safeT.admin.logout}
             </Button>
